@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-litellm
 langgraph
 langchain
 python-dotenv
@@ -9,3 +8,7 @@ psycopg2-binary
 redis
 httpx
 pydantic
+groq
+openai
+anthropic
+litellm[proxy]
