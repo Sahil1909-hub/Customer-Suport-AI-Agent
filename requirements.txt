@@ -1,4 +1,5 @@
-fastapi
+fastapi==0.115.5
+starlette<0.42
 uvicorn
 langgraph
 langchain
@@ -10,5 +11,5 @@ httpx
 pydantic
 groq
 openai
-anthropic
+mistralai
 litellm[proxy]

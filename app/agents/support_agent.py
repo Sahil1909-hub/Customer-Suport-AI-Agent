@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 import httpx
+from app.agents.classifier import choose_model
 
 
 LITELLM_URL = os.getenv(
@@ -8,10 +9,14 @@ LITELLM_URL = os.getenv(
     "http://localhost:4000/chat/completions"
 )
 
+
 async def ask_llm(message:str):
 
+    model = choose_model(message)
+    print(f"Selected model: {model}")
+
     payload = {
-        "model": "groq",
+        "model": model,
         "messages": [
             {
                 "role": "user",
@@ -29,4 +34,4 @@ async def ask_llm(message:str):
 
         data =  response.json()
 
-        return data["choices"][0]["message"]["content"]
+        return data
