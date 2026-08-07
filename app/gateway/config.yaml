@@ -5,12 +5,12 @@ model_list:
       model: groq/llama-3.3-70b-versatile
       api_key: os.environ/GROQ_API_KEY
 
-  - model_name: mistral
+  - model_name: mistral 
     litellm_params:
       model: mistral/mistral-small-latest
       api_key: os.environ/MISTRAL_API_KEY
 
   - model_name: nvidia
     litellm_params:
-      model: meta/llama-3.1-70b-instruct
+      model: nvidia_nim/nvidia/nemotron-3-nano-30b-a3b
       api_key: os.environ/NVIDIA_API_KEY

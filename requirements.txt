@@ -1,5 +1,5 @@
-fastapi==0.115.5
-starlette<0.42
+fastapi
+starlette
 uvicorn
 langgraph
 langchain
@@ -9,7 +9,8 @@ psycopg2-binary
 redis
 httpx
 pydantic
-groq
 openai
 mistralai
 litellm[proxy]
+langgraph-checkpoint-postgres
+psycopg[binary]

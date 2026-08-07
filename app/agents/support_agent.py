@@ -1,37 +1,26 @@
-import os
-from dotenv import load_dotenv
-import httpx
-from app.agents.classifier import choose_model
+from langchain_core.messages import HumanMessage
+
+from app.agents.graph import graph
 
 
-LITELLM_URL = os.getenv(
-    "LITELLM_URL",
-    "http://localhost:4000/chat/completions"
-)
+async def ask_llm(message: str, conversation_id: str):
 
-
-async def ask_llm(message:str):
-
-    model = choose_model(message)
-    print(f"Selected model: {model}")
-
-    payload = {
-        "model": model,
-        "messages": [
-            {
-                "role": "user",
-                "content": message
-            }
-        ]
+    config = {
+        "configurable": {
+            "thread_id": conversation_id
+        }
     }
 
-    async with httpx.AsyncClient() as client:
+    result = graph.invoke(
+        {
+            "messages": [
+                HumanMessage(content=message)
+            ]
+        },
+        config=config
+    )
 
-        response = await client.post(
-            LITELLM_URL,
-            json=payload
-        )
+    # The last message in the state is the AI response
+    answer = result["messages"][-1].content
 
-        data =  response.json()
-
-        return data
+    return answer
