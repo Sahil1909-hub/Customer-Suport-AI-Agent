@@ -20,7 +20,19 @@ async def ask_llm(message: str, conversation_id: str):
         config=config
     )
 
-    # The last message in the state is the AI response
     answer = result["messages"][-1].content
 
     return answer
+
+
+async def get_conversation_history(conversation_id: str):
+
+    config = {
+        "configurable": {
+            "thread_id": conversation_id
+        }
+    }
+
+    state = graph.get_state(config)
+
+    return state.values.get("messages", [])
